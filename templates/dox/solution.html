@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block body %}
+
+<!--page title start-->
+
+<section class="page-title overflow-hidden position-relative" data-bg-color="#fbf3ed">
+  <canvas id="confetti"></canvas>
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-7 col-md-12">
+        <h1 class="title"><span>S</span>ervices</h1>
+        <p>We're Building Modern And High Software</p>
+      </div>
+      <div class="col-lg-5 col-md-12 text-lg-end mt-3 mt-lg-0">
+        <nav aria-label="breadcrumb" class="page-breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'settings:home' %}">{% trans 'Home' %}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{% trans 'Services' %}</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <div class="page-title-pattern">
+    <img class="img-fluid" src="{% static 'images/bg/11.png' %}" alt="">
+  </div>
+</section>
+
+<!--page title end-->
+
+
+<!--body content start-->
+
+<div class="page-content">
+
+<!--about start-->
+
+<section class="text-center" data-bg-img="images/pattern/01.png">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 col-md-12 mx-auto">
+        <h3 class="text-black fw-normal line-h-2"><span class="text-theme">DoxERP</span> gives you a powerful and tight management of all the resources and information on which your entire business is based through an innovative set of software in one program</h3>
+      </div>
+    </div>
+    <div class="row mt-5">
+      {% for solution in solutions %}
+        <div class="col-lg-4 col-md-6 mt-5 mt-md-0">
+        <div class="featured-item style-2">
+          <div class="featured-icon"> <img src="{{solution.image.url}}">
+            <span class="rotateme"></span>
+          </div>
+          <div class="featured-title">
+            <h5>{{solution.name}}</h5>
+          </div>
+          <div class="featured-desc">
+            <p>{{solution.description}}</p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!--about end-->
+
+
+<!--about start-->
+<section class="position-relative py-10">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-7 col-md-12 image-column p-0 pe-lg-5">
+        <div class="img-box box-shadow">
+          <div class="box-loader"> <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <img class="img-fluid" src="{% static 'images/banner/03.jpg' %}" alt="">
+        </div>
+      </div>
+      <div class="col-lg-5 ms-auto col-md-12 mt-5 mt-lg-0">
+        <div class="section-title mb-4">
+          <div class="title-effect">
+            <div class="bar bar-top"></div>
+            <div class="bar bar-right"></div>
+            <div class="bar bar-bottom"></div>
+            <div class="bar bar-left"></div>
+          </div>
+          <h6>About Us</h6>
+          <h2>We're Building Modern And High Software</h2>
+        </div>
+        <ul class="list-unstyled list-icon mb-4">
+          <li class="mb-3"><i class="la la-check"></i> Deos et accusamus et iusto odio</li>
+          <li class="mb-3"><i class="la la-check"></i> Distinctively brand adaptive innovation</li>
+          <li><i class="la la-check"></i> Molestias a orci facilisis rutrum</li>
+        </ul>
+        <a class="btn btn-border btn-circle" href="#" data-text="See About"> <span>S</span><span>e</span><span>e</span><span> </span>
+          <span>A</span><span>b</span><span>o</span><span>u</span><span>t</span>
+        </a>
+        <a class="btn btn-theme btn-circle" href="#" data-text="Learn More"> <span>L</span><span>e</span><span>a</span><span>r</span><span>n</span>
+          <span> </span><span>M</span><span>o</span><span>r</span><span>e</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+<!--about end-->
+
+</div>
+
+<!--body content end--> 
+
+{% endblock body %}

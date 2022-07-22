@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+{% block body %}
+
+
+<!--page title start-->
+
+<section class="page-title overflow-hidden position-relative" data-bg-color="#037dd50f">
+  <canvas id="confetti"></canvas>
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-7 col-md-12">
+        <h1 class="title"><span>B</span>log Single</h1>
+        <p>We're Building Modern And High Software</p>
+      </div>
+      <div class="col-lg-5 col-md-12 text-lg-end mt-3 mt-lg-0">
+        <nav aria-label="breadcrumb" class="page-breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'settings:home' %}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'blog:post_list' %}">Blog</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Blog Single</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <div class="page-title-pattern"><img class="img-fluid" src="{% static 'images/bg/11.png' %}" alt=""></div>
+</section>
+
+<!--page title end-->
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-12">
+        <div class="left-side">
+          <div class="post">
+            <div class="post-image">
+              <img class="img-fluid" src="{{post.image_detail_body.url}}" alt="">
+            </div>
+            <div class="post-desc">
+              <div class="post-meta">
+                <ul class="list-inline">
+                  <li><i class="la la-calendar me-1"></i>{{post.created_at|date:"F j, Y"}}</li>
+                  <li><i class="la la-user me-1"></i> {% trans 'By' %} {{post.author}}</li>
+                </ul>
+              </div>
+              <div class="post-title">
+                <h2>{{post.title}}</h2>
+              </div>
+              <p class="lead">{{post.description_one|safe}}</p>
+              <p class="mt-3 mb-0">{{post.description_two|safe}}</p>
+            </div>
+          </div>
+
+          <div class="blog-share d-sm-flex justify-content-between mt-5">
+                <div class="social-icons">
+                  <h4 class="mb-2">Share: </h4>
+                  <ul>
+                    <li><a href="#"><i class="fab fa-facebook-f"></i></a>
+                    </li>
+                    <li><a href="#"><i class="fab fa-twitter"></i></a>
+                    </li>
+                    <li><a href="#"><i class="fab fa-google-plus-g"></i></a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+          <div class="post-comments mt-5">
+            <div class="section-title mb-4">
+              <h2 class="title">{% trans 'Leave A Comment' %}</h2>
+            </div>
+              <div id="disqus_thread"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-12 sidebar mt-5 mt-lg-0">
+        <div class="widget">
+          <div class="widget-search">
+            <form class="form-inline form" action="{% url 'blog:post_list' %}" method="GET">
+              <div class="widget-searchbox">
+                <button type="submit" class="search-btn"> <i class="fas fa-search"></i>
+                </button>
+                <input type="text" name="q" value="" placeholder="{% trans 'Search Hare.....' %}" class="form-control">
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="widget">
+          <h5 class="widget-title">{% trans 'Categories' %}</h5>
+          <ul class="widget-categories list-unstyled">
+            {% for category in categories %}
+            <li> <a href="{% url 'blog:post_by_category' category.slug %}">{{category.name}} <span>({{category.post_count}})</span></a></li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="widget">
+          <h5 class="widget-title">{% trans 'Recent Post' %}</h5>
+          <div class="recent-post">
+            <ul class="list-unstyled">
+              {% for post in recent_posts %}
+              <li class="mb-3">
+                <div class="recent-post-thumb">
+                  <img class="img-fluid" src="{{post.image_home.url}}" alt="">
+                </div>
+                <div class="recent-post-desc"> <a href="{{post.get_absolute_url}}">{{post.title}}</a>
+                  <div class="post-date">{{post.created_at|date:"j"}} <span>{{post.created_at|date:"F"}} {{post.created_at|date:"Y"}}</span>
+                  </div>
+                </div>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+        <div class="widget">
+          <h5 class="widget-title">{% trans 'Tags' %}</h5>
+          <ul class="widget-tags list-inline">
+            {% for tag in tags %}
+            <li> <a>{{tag.name}}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--blog single end--> 
+
+<script>
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+
+    var disqus_config = function () {
+    this.page.url = http://127.0.0.1:8000/{{post.get_absolute_url}};  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = {{post.slug}}; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://doxerp.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+{% endblock body %}
